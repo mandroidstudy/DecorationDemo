@@ -9,15 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ceiling_decoration.ICeilingAdapter;
+import com.example.ceiling_decoration.CeilingDecoration;
 
 import java.util.List;
 
-public class StarAdapter extends RecyclerView.Adapter<StarAdapter.StarViewHolder> implements ICeilingAdapter {
+public class StarAdapter extends RecyclerView.Adapter<StarAdapter.StarViewHolder> implements CeilingDecoration.ICeilingAdapter {
 
     private Context context;
     private List<Star> starList;
-
 
     public StarAdapter(Context context, List<Star> starList) {
         this.context = context;

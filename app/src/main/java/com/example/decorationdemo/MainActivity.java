@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new CeilingDecoration(this).
                 setHeadTextColor(Color.BLACK).
                 setHeadPaintColor(Color.WHITE).
-                setHeaderTextGravity(CeilingDecoration.TextGravity.CENTER));
+                setHeaderTextGravity(CeilingDecoration.TextGravity.RIGHT));
         recyclerView.setAdapter(new StarAdapter(this, starList));
     }
 

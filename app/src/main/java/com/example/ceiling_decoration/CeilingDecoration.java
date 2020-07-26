@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.IntDef;
@@ -30,7 +31,7 @@ public class CeilingDecoration extends RecyclerView.ItemDecoration {
     private Rect textRect;
 
     private boolean isEnableDivider=true;
-    private int dividerHeight=4;
+    private int dividerHeight=3;
     private int headerTextGravity= TextGravity.LEFT;
 
     public CeilingDecoration(Context context) {
@@ -115,7 +116,7 @@ public class CeilingDecoration extends RecyclerView.ItemDecoration {
                     if (headerTextGravity== TextGravity.LEFT){
                         x=left + 20;
                     }else if (headerTextGravity== TextGravity.RIGHT){
-                        x=right - 20;
+                        x=right - textRect.width()-20;
                     }else {
                         x=left+(right-left)/2-textRect.width()/2;
                     }
@@ -156,7 +157,7 @@ public class CeilingDecoration extends RecyclerView.ItemDecoration {
                 if (headerTextGravity== TextGravity.LEFT){
                     x=left + 20;
                 }else if (headerTextGravity== TextGravity.RIGHT){
-                    x=right - 20;
+                    x=right - textRect.width()-20;
                 }else {
                     x=left+(right-left)/2-textRect.width()/2;
                 }
@@ -169,7 +170,7 @@ public class CeilingDecoration extends RecyclerView.ItemDecoration {
                 if (headerTextGravity== TextGravity.LEFT){
                     x=left + 20;
                 }else if (headerTextGravity== TextGravity.RIGHT){
-                    x=right - 20;
+                    x=right - textRect.width()-20;
                 }else {
                     x=left+(right-left)/2-textRect.width()/2;
                 }
@@ -204,5 +205,20 @@ public class CeilingDecoration extends RecyclerView.ItemDecoration {
     @IntDef({TextGravity.LEFT,TextGravity.CENTER,TextGravity.RIGHT})
     public @interface TextGravity{
         int LEFT=0, CENTER =1,RIGHT=2;
+    }
+
+    public interface ICeilingAdapter {
+
+        default  boolean isGroupHeader(int position) {
+            if (position == 0) {
+                return true;
+            } else {
+                String currentGroupName = getGroupName(position);
+                String preGroupName = getGroupName(position - 1);
+                return !TextUtils.equals(currentGroupName,preGroupName);
+            }
+        }
+
+        String getGroupName(int position);
     }
 }
